@@ -21,7 +21,17 @@ class PostsController < ApplicationController
       render json: {messages: 'not found'}, status: :not_found
     end
   end
-  
+
+  def update 
+    post = Post.find(params[:id])
+
+    if post.update(post_params)
+      render json: post, satus: :ok 
+    else 
+      render json: post.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def post_params
