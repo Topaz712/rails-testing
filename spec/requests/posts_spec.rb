@@ -92,6 +92,16 @@ RSpec.describe 'Posts API', type: :request do
       end
     end
   end
+
+  describe 'DELETE /posts/:id' do
+    let!(:post) { create(:post) }
+
+    before { delete "/posts/#{post.id}" }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
   
   def json
     JSON.parse(response.body)
